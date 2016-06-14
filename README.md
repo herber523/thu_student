@@ -1,12 +1,10 @@
 # ThuStudent
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/thu_student`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+快速獲取東海大學學生個人基本資料
+需要帳號密碼登入
 
 ## Installation
 
-Add this line to your application's Gemfile:
+加入這行到您的 Gemfile:
 
 ```ruby
 gem 'thu_student'
@@ -22,7 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+取得個人基本資料
+
+```ruby
+	ThuStudent.profile('學號','密碼')
+```
+
+取得個人成績總表
+
+```ruby
+	ThuStudent.transcript('學號','密碼')
+```
 
 ## Development
 
@@ -32,5 +40,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/thu_student.
+Bug reports and pull requests are welcome on GitHub at https://github.com/herber523/thu_student.
 
