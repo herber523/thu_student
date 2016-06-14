@@ -1,5 +1,5 @@
 require 'thu_student/version'
-
+require 'mechanize'
 module ThuStudent
   def self.profile(username, password)
     agent = Mechanize.new
