@@ -3,6 +3,7 @@ PATH
   specs:
     thu_student (0.1.2)
       capybara
+      capybara-webkit
       nokogiri
 
 GEM
@@ -16,6 +17,10 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.11.1)
+      capybara (>= 2.3.0, < 2.8.0)
+      json
+    json (2.0.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)

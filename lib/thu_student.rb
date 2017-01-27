@@ -2,37 +2,34 @@ require 'thu_student/version'
 require 'rubygems'
 require 'capybara'
 require 'capybara/dsl'
-require 'capybara-webkit'
+require 'capybara/poltergeist'
 require 'nokogiri'
 
-Capybara.javascript_driver = :webkit
-Capybara.current_driver = :webkit
-Capybara::Webkit.configure do |config|
-  config.allow_url('*')
+
+Capybara.javascript_driver = :poltergeist
+Capybara.current_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
 end
 
 class ThuStudent
   include Capybara::DSL
+
+  attr_reader :profile
+  attr_reader :course_info
+  attr_reader :course
+
   def initialize(id, password)
     visit('http://fsis.thu.edu.tw/mosi/ccsd3/index.php?job=stud&loginn=&r=http://fsis.thu.edu.tw/')
     find('#login-username').set(id)
     find('#login-password').set(password)
     find('button').click
-  end
-
-  def profile
     visit('http://fsiso.thu.edu.tw/wwwstud/STUD_V6/INFO/MyProfile.php?job=personinfo')
-    profile = profile_parse(html)
-  end
-
-  def course_info
+    @profile = profile_parse(html)
     visit('http://fsiso.thu.edu.tw/wwwstud/STUD_V6/INFO/MyProfile.php?job=courseinfo')
-    course_info = course_info_parse(html)
-  end
-
-  def course
+    @course_info = course_info_parse(html)
     visit('http://fsiso.thu.edu.tw/wwwstud/STUD_V6/COURSE/rcrd_all.php')
-    course = course_parse(html)
+    @course = course_parse(html)
   end
 
   private
@@ -46,7 +43,9 @@ class ThuStudent
     profile_data[:name] = profile[1]
     profile_data[:sex] = profile[2]
     birthday = profile[3].split(' ')
-    profile_data[:birthday] =  [birthday[1].to_i + 1911, birthday[3], birthday[5]].join('-')
+    profile_data[:birthday] =  [birthday[1].to_i + 1911,
+                                birthday[3],
+                                birthday[5]].join('-')
     profile_data[:id] = profile[4]
     profile_data[:type] = profile[5]
     grade = profile[6].split(' ')

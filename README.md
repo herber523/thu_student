@@ -4,7 +4,12 @@
 
 ## Installation
 
+```bash
+sudo apt-get install libqt4-dev libqtwebkit-dev
+```
+
 加入這行到您的 Gemfile:
+
 
 ```ruby
 gem 'thu_student'
