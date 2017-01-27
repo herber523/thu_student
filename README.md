@@ -4,8 +4,9 @@
 
 ## Installation
 
+需要安裝 phantomjs
 ```bash
-sudo apt-get install libqt4-dev libqtwebkit-dev
+$ npm install -g phantomjs
 ```
 
 加入這行到您的 Gemfile:
@@ -25,16 +26,17 @@ Or install it yourself as:
 
 ## Usage
 
-取得個人基本資料
-
 ```ruby
-	ThuStudent.profile('學號','密碼')
-```
+student = ThuStudent.new('student_id','password')
 
-取得個人成績總表
+student.profile
+#profile 個人資料
 
-```ruby
-	ThuStudent.transcript('學號','密碼')
+student.course_info
+#course_info 學程資訊
+
+student.course
+#course 歷年修課紀錄
 ```
 
 ## Development
